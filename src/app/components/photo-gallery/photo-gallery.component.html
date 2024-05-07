@@ -1,0 +1,16 @@
+<div class="hero">
+
+    <div class="center" style="padding-top: 40px; width:80%;max-width:800px;">
+        <div class="spotlight-group">
+            <span *ngFor="let item of items">
+                <span  *ngIf="(item.hidden !== true)">
+                    <a class="spotlight" href="{{item.url}}" style="padding:5px;">
+                        <img src="{{item.thumb}}" width="140">
+                    </a>
+                </span>
+            </span>
+        </div>
+        
+    </div>
+
+</div>

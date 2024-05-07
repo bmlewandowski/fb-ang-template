@@ -1,0 +1,33 @@
+<div style="float:right;">
+    <app-upload-form></app-upload-form>
+</div>
+  
+<div style="width:400px;margin-left:5px;">
+  <h2 style="margin-top:30px;">Manage Images in Gallery</h2>
+  <ul style="list-style-type: none;">
+    @for (file of fileUploads; track file.key) {
+    <li style="padding:5px;background-color:linen;">
+      <img src="{{ file.url }}" height="50px;" style="padding-right:10px;">
+      <a href="{{ file.url }}">{{ file.name }}</a>
+
+      <button mat-icon-button color="warn" matTooltip="delete" (click)="deleteFileUpload(file)" style="float: right">
+        <mat-icon>delete</mat-icon>
+      </button>  
+
+      <span *ngIf="file.hidden === true">
+        <button mat-icon-button color="default" matTooltip="unhide" (click)="hideFileUpload(file)" style="float: right; margin-right:15px">
+          <mat-icon>hide_image</mat-icon>
+        </button>            
+      </span>
+      <span *ngIf="file.hidden !== true">
+        <button mat-icon-button color="primary" matTooltip="hide" (click)="hideFileUpload(file)" style="float: right; margin-right:15px">
+          <mat-icon>image</mat-icon>
+        </button>                                     
+      </span>
+
+    </li>
+    }
+  </ul>
+</div>
+  
+  

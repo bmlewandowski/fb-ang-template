@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span style="font-family:tahoma;">Angular Firebase Template</span>
+    <span class="nav-spacer"></span>
+    <a mat-icon-button matTooltip="Home" routerLink="/gallery">
+      <mat-icon style="padding-left:10px;padding-right:10px;">home</mat-icon>
+    </a> 
+    @if (authService.currentUserSig() == null) {
+     
+      <a mat-icon-button matTooltip="Login" routerLink="/login">
+        <mat-icon style="font-size:24px;width:24px;height:24px;padding-left:10px;">login</mat-icon>
+      </a> 
+    
+    }
+    @if (authService.currentUserSig()) {
+
+      <a mat-icon-button matTooltip="Admin" routerLink="/admin">
+        <mat-icon style="font-size:24px;width:24px;height:24px;padding-left:10px;padding-right:10px;">miscellaneous_services</mat-icon>
+      </a> 
+ 
+      <a mat-icon-button matTooltip="Logout" (click)="logout()">
+        <mat-icon style="font-size:24px;width:24px;height:24px;padding-left:10px;">logout</mat-icon>
+      </a>     
+    }
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+

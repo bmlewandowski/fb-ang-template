@@ -1,0 +1,61 @@
+<mat-card class="upload-card">
+    <mat-card-title color="warn">
+      Upload Image to Gallery
+    </mat-card-title>
+    <div>
+
+      <label>
+
+        <input
+        #inputField
+        hidden
+        type="file"
+        accept="image/*"
+        id="imageFileUploader"
+        (change)="addImage(inputField.files, $event)"
+        (click)="inputField.value = ''"
+      />
+      <!-- (change)="selectFile($event)" -->
+      <button mat-raised-button 
+      (click)="inputField.click()"
+      matTooltip="Select Image to Upload" 
+      style="margin-top:20px;">
+        Select Photo
+      </button>
+
+      </label>
+    </div>
+
+    <div style="padding-top:20px;padding-bottom:30px;">
+      <button
+        mat-raised-button 
+        color="primary"
+        matTooltip="Upload Image"
+        [disabled]="!selectedFiles"
+        (click)="upload()"
+      >
+        Upload
+      </button>
+    </div>
+
+    @if (currentFileUpload) {
+      <div style="margin-bottom:10px">
+        <mat-progress-bar mode="determinate" value="{{ percentage }}"></mat-progress-bar>
+      </div>
+      }
+
+    <div style="text-align:center;">
+      <img [src]="url">
+      <!-- <canvas id="canvas"></canvas> -->
+    </div>
+
+  </mat-card>
+
+
+
+
+
+
+  
+  
+  
