@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-upload-form',
   standalone: true,
@@ -15,7 +18,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatCardModule,
     MatIconModule,
     MatTooltip,
-    MatProgressBarModule
+    MatProgressBarModule,
+    ImageCropperComponent
   ],
   templateUrl: './upload-form.component.html',
   styleUrl: './upload-form.component.css'
@@ -28,6 +32,13 @@ export class UploadFormComponent {
   uploadService = inject(FileUploadService);
   url: string | ArrayBuffer | null = 'https://placehold.co/300x300';
   datauri!: string | null;
+  imageChangedEvent: Event | null = null;
+  croppedImage: SafeUrl = '';
+
+  constructor(
+    private sanitizer: DomSanitizer
+  ) {
+  }
 
   async addImage(files: any, event: any) {
 
@@ -100,6 +111,23 @@ export class UploadFormComponent {
 
       }
     }
+  }
+
+  fileChangeEvent(event: Event): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl!);
+    // event.blob can be used to upload the cropped image
+  }
+  imageLoaded(image: LoadedImage) {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
   }
 
 }
